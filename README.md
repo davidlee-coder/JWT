@@ -1,4 +1,4 @@
-<img width="1364" height="745" alt="image" src="https://github.com/user-attachments/assets/d9530274-3756-4573-ae1c-da8c583aa821" /># JWT Algorithm Confusion (Public Key Exposed)
+# JWT Algorithm Confusion (Public Key Exposed)
 
 A server that trusts the JWT `alg` header can be tricked into verifying an RSA-signed token as HMAC. If the public key is exposed, an attacker can use it as an HMAC secret to forge tokens (e.g., escalate to admin) without the private key.
 
