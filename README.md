@@ -34,21 +34,25 @@ If `keys.publicKey` is used as the HMAC secret when `alg` is `HS256`, verificati
 I logged in as a normal user (wiener) and captured the login request in Burp Suite. Forwarding it to Repeater, I used the JWT Editor extension to inspect the token and confirmed it used RS256 (RSA-SHA256) for signing.
 
 <img width="1363" height="732" alt="User login" src="https://github.com/user-attachments/assets/dcfb432c-504a-4364-b09a-5f014925411e" />
-![JWT Editor showing RS256](<repeater tab.png>)
-![Repeater setup](<repeater tab-1.png>)
-![Token details](<alg RS256.png>)
+<img width="1352" height="722" alt="image" src="https://github.com/user-attachments/assets/b79bc9a8-9e3a-4c53-b8c7-87bd49183697" />
+<img width="1029" height="734" alt="image" src="https://github.com/user-attachments/assets/0f5cd36d-3d8a-47ae-a368-4adc06cfb929" />
+<img width="1357" height="739" alt="image" src="https://github.com/user-attachments/assets/375b4440-2df5-4a86-9be8-98df15eb2144" />
+
 
 To find an exposed public key, I probed common endpoints like `/jwks.json` and discovered a JWK set containing the RSA public key. I observed that attempting to access the admin endpoint directly returned a 401 unauthorized status code.
 
-![Admin endpoint access denied](<admin 401.png>)
+<img width="1165" height="710" alt="image" src="https://github.com/user-attachments/assets/0b396f4a-7a7d-4146-8aa7-5e525ace4d6f" />
+
 
 **Phase 1: Key Conversion**  
 I converted the JWK to PEM format using Burp's JWK Editor, then base64-encoded the PEM to use as a symmetric HMAC secret. Next, I generated a new symmetric key entry in the JWT Editor and replaced its `k` value with the base64-encoded PEM.
 
-![JWK to PEM conversion](<Public key.png>)
-![PEM base64 encoding](<decoded to base64.png>)
-![alt text](<before k replacement.png>)
-![Symmetric key generation](<after k replcement.png>)
+<img width="1057" height="728" alt="image" src="https://github.com/user-attachments/assets/c4435306-b0d6-4eed-9a04-e0f1068f045e" />
+<img width="1119" height="714" alt="image" src="https://github.com/user-attachments/assets/98b86ac5-c2ed-4fd5-942c-a73d905ff7d6" />
+<img width="1353" height="518" alt="image" src="https://github.com/user-attachments/assets/d78a841f-b8db-46f2-adcd-fec17a210364" />
+<img width="1079" height="708" alt="image" src="https://github.com/user-attachments/assets/767c1a32-bcf3-4b42-a8fd-2ca49c5d088e" />
+<img width="1114" height="709" alt="image" src="https://github.com/user-attachments/assets/5b4faa48-cf90-47a6-a3eb-a07d5ffb157a" />
+
 
 **Phase 2: Token Forgery**  
 Back in Repeater, I modified the JWT: changed the header `alg` to `HS256`, kept the original payload, and re-signed it using the public key as the HMAC secret. Sending the forged token to the restricted admin endpoint succeeded, granting access. I then used the admin panel to delete the target user (carlos), completing the lab.
