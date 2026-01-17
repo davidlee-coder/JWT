@@ -1,4 +1,4 @@
-# JWT Algorithm Confusion (Public Key Exposed)
+<img width="1364" height="745" alt="image" src="https://github.com/user-attachments/assets/d9530274-3756-4573-ae1c-da8c583aa821" /># JWT Algorithm Confusion (Public Key Exposed)
 
 A server that trusts the JWT `alg` header can be tricked into verifying an RSA-signed token as HMAC. If the public key is exposed, an attacker can use it as an HMAC secret to forge tokens (e.g., escalate to admin) without the private key.
 
@@ -57,12 +57,18 @@ I converted the JWK to PEM format using Burp's JWK Editor, then base64-encoded t
 **Phase 2: Token Forgery**  
 Back in Repeater, I modified the JWT: changed the header `alg` to `HS256`, kept the original payload, and re-signed it using the public key as the HMAC secret. Sending the forged token to the restricted admin endpoint succeeded, granting access. I then used the admin panel to delete the target user (carlos), completing the lab.
 
+Before Modification
+<img width="1032" height="673" alt="image" src="https://github.com/user-attachments/assets/4b699571-814c-4911-97dd-ddc2ef848cb4" />
 
-![JWT modification](<Before alg and sub change.png>)
-![Re-signing the token](<after alg and sub change.png>)
-![Admin access granted](<admin succes.png>)
-![Deleting the user](<admin account takeover.png>)
-![Confirmation](<lab solved.png>)
+After Modification
+<img width="1126" height="648" alt="image" src="https://github.com/user-attachments/assets/faa138fa-51a4-456c-8869-45f672951699" />
+
+<img width="1352" height="687" alt="image" src="https://github.com/user-attachments/assets/6d8009f8-be74-42e9-8bc0-68e60ad15f97" />
+
+<img width="1311" height="693" alt="image" src="https://github.com/user-attachments/assets/337b6b8f-8e3c-4980-b0fc-0b25342e3cf6" />
+
+<img width="1349" height="747" alt="image" src="https://github.com/user-attachments/assets/744daa8a-ecd4-48d7-8b60-ee8bdd22c889" />
+
 
 Example JWK snippet (from `/jwks.json`):
 
