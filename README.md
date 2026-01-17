@@ -34,7 +34,7 @@ If `keys.publicKey` is used as the HMAC secret when `alg` is `HS256`, verificati
 I logged in as a normal user (wiener) and captured the login request in Burp Suite. Forwarding it to Repeater, I used the JWT Editor extension to inspect the token and confirmed it used RS256 (RSA-SHA256) for signing.
 
 ![Login and token inspection](<User login.png>)
- ![JWT Editor showing RS256](<repeater tab.png>)
+![JWT Editor showing RS256](<repeater tab.png>)
 ![Repeater setup](<repeater tab-1.png>)
 ![Token details](<alg RS256.png>)
 
