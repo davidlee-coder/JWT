@@ -30,7 +30,7 @@ function verifyJWT(token) {
 If `keys.publicKey` is used as the HMAC secret when `alg` is `HS256`, verification will succeed without the private key.
 
 ## Exploitation
-
+![Login and token inspection](<User login.png>)
 I logged in as a normal user (wiener) and captured the login request in Burp Suite. Forwarding it to Repeater, I used the JWT Editor extension to inspect the token and confirmed it used RS256 (RSA-SHA256) for signing.
 
 <img width="1363" height="732" alt="User login" src="https://github.com/user-attachments/assets/dcfb432c-504a-4364-b09a-5f014925411e" />
