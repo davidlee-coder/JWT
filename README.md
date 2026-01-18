@@ -41,13 +41,15 @@ I logged in as a normal user (wiener) and captured the login request in Burp Sui
 <img width="1029" height="734" alt="image" src="https://github.com/user-attachments/assets/0f5cd36d-3d8a-47ae-a368-4adc06cfb929" />
 
 <img width="1357" height="739" alt="image" src="https://github.com/user-attachments/assets/375b4440-2df5-4a86-9be8-98df15eb2144" />
-
+<p align="center"></i></p>
+<br><br>
 
 To find an exposed public key, I probed common endpoints like `/jwks.json` and discovered a JWK set containing the RSA public key. I observed that attempting to access the admin endpoint directly returned a 401 unauthorized status code.
 
 
 <img width="1165" height="710" alt="image" src="https://github.com/user-attachments/assets/0b396f4a-7a7d-4146-8aa7-5e525ace4d6f" />
-
+<p align="center"></i></p>
+<br><br><br>
 
 **Phase 1: Key Conversion**  
 I converted the JWK to PEM format using Burp's JWK Editor, then base64-encoded the PEM to use as a symmetric HMAC secret. Next, I generated a new symmetric key entry in the JWT Editor and replaced its `k` value with the base64-encoded PEM.
@@ -62,7 +64,8 @@ I converted the JWK to PEM format using Burp's JWK Editor, then base64-encoded t
 <img width="1079" height="708" alt="image" src="https://github.com/user-attachments/assets/767c1a32-bcf3-4b42-a8fd-2ca49c5d088e" />
 
 <img width="1114" height="709" alt="image" src="https://github.com/user-attachments/assets/5b4faa48-cf90-47a6-a3eb-a07d5ffb157a" />
-
+<p align="center"></i></p>
+<br><br>
 
 
 **Phase 2: Token Forgery**  
@@ -72,7 +75,8 @@ Before Modification
 
 
 <img width="1032" height="673" alt="image" src="https://github.com/user-attachments/assets/4b699571-814c-4911-97dd-ddc2ef848cb4" />
-
+<p align="center"></i></p>
+<br>
 
 After Modification
 
@@ -84,7 +88,8 @@ After Modification
 <img width="1311" height="693" alt="image" src="https://github.com/user-attachments/assets/337b6b8f-8e3c-4980-b0fc-0b25342e3cf6" />
 
 <img width="1349" height="747" alt="image" src="https://github.com/user-attachments/assets/744daa8a-ecd4-48d7-8b60-ee8bdd22c889" />
-
+<p align="center"></i></p>
+<br><br>
 
 Example JWK snippet (from `/jwks.json`):
 
