@@ -1,5 +1,19 @@
 # JWT Algorithm Confusion (Public Key Exposed)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Security Research](https://img.shields.io/badge/Security-Research-blue.svg)](https://github.com/yourusername/web-shell-race-condition)
+
+# Table of Contents
+
+- [Overview](#overview)
+- [Background](#backgroud)
+- [Root Cause](#root-cause)
+- [Exploitation](#exploitation)
+- [Mitigation](#mitigation)
+- [Tools](#tools-resources)
+- [References](#references)
+
+  # Overview
 A server that trusts the JWT `alg` header can be tricked into verifying an RSA-signed token as HMAC. If the public key is exposed, an attacker can use it as an HMAC secret to forge tokens (e.g., escalate to admin) without the private key.
 
 ## Background
