@@ -6,6 +6,7 @@
 # Table of Contents
 
 - [Overview](#overview)
+- [My "Aha" Moment](#my-aha-moment)
 - [Background](#backgroud)
 - [Root Cause](#root-cause)
 - [Exploitation](#exploitation)
@@ -15,6 +16,10 @@
 
   # Overview
 A server that trusts the JWT `alg` header can be tricked into verifying an RSA-signed token as HMAC. If the public key is exposed, an attacker can use it as an HMAC secret to forge tokens (e.g., escalate to admin) without the private key.
+
+# My "Aha" Moment!
+
+While working on JWT Algorithm Confusion (Public Key Exposed) lab, I noticed the vulnerability wasn't just "use public key as secret" It was that the server was blindly using whatever key material was provided under the kid header or default key, without validating whether the algorithm made cryptographic sense. When I forced HS256, the library took the public bytes as symmetric secret, no verification that it was suppose to be an asymmetric.Tht tiny mismatch between what the signer intended (RSA public and privat key pair) and what the verifier accepted was the entire exploit. Before that I was thinking "how do I trick the signature check?" but the real insight was that the algorithm switch creates a type of confusion at crypto layer, asymmetric public key becomes symmetric secret key.
 
 ## Background
 
