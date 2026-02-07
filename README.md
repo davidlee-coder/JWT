@@ -3,6 +3,18 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Security Research](https://img.shields.io/badge/Security-Research-blue.svg)](https://github.com/yourusername/web-shell-race-condition)
 
+**Level** — Expert<p align="center"></i></p>
+<br>
+
+**Category** — JWT<p align="center"></i></p>
+<br>
+**PortSwigger Link** — [https://portswigger.net/web-security/jwt/algorithm-confusion/lab-jwt-authentication-bypass-via-algorithm-confusion](https://portswigger.net/web-security/jwt/algorithm-confusion/lab-jwt-authentication-bypass-via-algorithm-confusion)<p align="center"></i></p>
+<br>
+**Completed** — January 15 2026<p align="center"></i></p>
+<br>
+**Tools** — Burp Repeater (For manual testing), JWT Editor (a comprehensive tool for analyzing and manipulating JSON Web Tokens (JWTs) within Burp), Documentation: [Flameshot](https://flameshot.org) (Screen capture & annotation) <p align="center"></i></p>
+<br>
+
 # Table of Contents
 
 - [Overview](#overview)
@@ -140,13 +152,5 @@ if (tokenHeader.alg !== 'RS256') throw new Error('Invalid algorithm');
 4. **Rotate and protect keys**; avoid exposing private keys and minimize public key exposure to trusted discovery endpoints guarded by appropriate controls.
 5. **Use libraries that require algorithm whitelists** or where verification is bound to a trusted key store.
 
-## Tools
 
-- Burp Suite (JWT Editor, Repeater)
-- JWK/JWKs converters or JWT tooling
-
-## References
-
-- PortSwigger lab: JWT authentication bypass via algorithm confusion — https://portswigger.net/web-security/jwt/algorithm-confusion/lab-jwt-authentication-bypass-via-algorithm-confusion
-
-Happy (ethical) hacking!
+**Happy (ethical) hacking!**
