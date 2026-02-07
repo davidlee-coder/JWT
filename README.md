@@ -23,8 +23,6 @@
 - [Root Cause](#root-cause)
 - [Exploitation](#exploitation)
 - [Mitigation](#mitigation)
-- [Tools](#tools-resources)
-- [References](#references)
 
   # Overview
 A server that trusts the JWT `alg` header can be tricked into verifying an RSA-signed token as HMAC. If the public key is exposed, an attacker can use it as an HMAC secret to forge tokens (e.g., escalate to admin) without the private key.
