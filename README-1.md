@@ -122,8 +122,9 @@ The Cryptographic Signature: After clicking 'Sign,' a symmetric JWK was selected
 - **Strong key validation** — use kid to lookup expected key and algorithm; reject if mismatch  
 - **Disable legacy algorithms** — avoid HS256 if asymmetric is required; prefer EdDSA or ES256  
 - **Audit JWKS / key exposure** — ensure no debug endpoints leak secrets; use secure key storage
-**
-Happy (ethical) Hacking!**
+
+**Happy (ethical) Hacking!**
+
 
 
 
