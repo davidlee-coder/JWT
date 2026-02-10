@@ -74,7 +74,7 @@ When the standard /jwks.json probes returned a 404 Not Found, it was clear the p
 <p align="center"></i></p>
 <br><br>
 
-Running the sig2n tool produced several mathematically valid candidates for the modulus (\(n\)). Since any of these could theoretically be the server's public key, I had to systematically test each one. The tool provided the recovered key in both X.509 and PKCS1 formats, along with pre-signed, tampered JWTs for each variation. I began a manual 'brute-force' to the  GET /my-account path of the candidate tokens. My first several attempts resulted in 302 Redirects to the login page, indicating that the server's signature verification had failed and my session was invalidated. My success came when I tested the token derived from the second X.509-formatted entry. Instead of a redirect, the server responded with a 200 OK. 
+Running the sig2n tool produced several mathematically valid candidates for the modulus (\(n\)). Since any of these could theoretically be the server's public key, I had to systematically test each one. The tool provided the recovered key in both X.509 and PKCS1 formats, along with pre-signed, tampered JWTs for each variation. I began a manual 'brute-force' to the  GET /my-account path of the candidate tokens. My first several attempts resulted in 302 Redirects to the login page, indicating that the server's signature verification had failed and my session was invalidated. My success came when I tested the token derived from the second X.509-formatted entry. Instead of a redirect, the server responded with a 200 OK, I also switched the alg header to HS256 with the sub claim wiener and still received 200 OK it exposed the mechanism's vulnerability to algorithm confusion attacks. 
 
 Tampered JWT:
 
@@ -91,12 +91,7 @@ Base64 encoded x509 key:
 <br><br>
 
 To carry out the final forgery, I had to 're-map' the server's public key as a symmetric HMAC secret. I went to Burp Suite JWT Editor Keys tab and created a New Symmetric Key in JWK format. I replaced the placeholder value in the k property with the Base64-encoded public key I previously reconstructed. This was the critical step: by saving this public key material as a symmetric key, I prepared the tool to sign my forged token using HS256. I made sure that I was actually utilizing raw Base64 key material and not a pre-signed token. This was helpful in ensuring I had full control over the payload while the signing operation took place. I was confident that, when I modified the sub claim from wiener to administrator, my signature would be mathematically tied to the server's own 'secret' public key.
-BEFORE MODIFYING k VALUE:
 <img width="631" height="507" alt="image" src="https://github.com/user-attachments/assets/d2087269-410c-47d8-b22c-c0930f8e0214" />
-<p align="center"></i></p>
-<br><br>
-
-AFTER MODIFYING k VALUE:
 <img width="621" height="501" alt="image" src="https://github.com/user-attachments/assets/d79778c4-82c0-4002-88dc-f29919c5bb93" />
 <p align="center"></i></p>
 <br><br>
@@ -129,6 +124,7 @@ The Cryptographic Signature: After clicking 'Sign,' a symmetric JWK was selected
 - **Audit JWKS / key exposure** — ensure no debug endpoints leak secrets; use secure key storage
 **
 Happy (ethical) Hacking!**
+
 
 
 
