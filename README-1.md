@@ -1,4 +1,4 @@
-<img width="1028" height="661" alt="image" src="https://github.com/user-attachments/assets/669cf4a5-95a8-4493-a475-7e2ed62ede9c" /><img width="1028" height="661" alt="image" src="https://github.com/user-attachments/assets/545c7c4c-9373-43ef-9f30-d3eb1d6dff22" /># JWT Algorithm Confusion – No Exposed Signing Key
+# JWT Algorithm Confusion – No Exposed Signing Key
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Security Research](https://img.shields.io/badge/Security-Research-blue.svg)](https://github.com/yourusername/web-shell-race-condition)
 
@@ -129,5 +129,6 @@ The Cryptographic Signature: After clicking 'Sign,' a symmetric JWK was selected
 - **Audit JWKS / key exposure** — ensure no debug endpoints leak secrets; use secure key storage
 **
 Happy (ethical) Hacking!**
+
 
 
