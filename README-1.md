@@ -100,6 +100,7 @@ Having reconstructed the public key and imported it again as a symmetric secret,
 The Forgery:
 
 Header Swap: I manually modified alg parameter from "RS256" to "HS256", and the server had to adapt to the changes. I also modified the sub (subject) claim in the wiener payload to administrator.
+
 BEFORE SWITCHING 'sub' claim AND alg headers: 
 <img width="1028" height="661" alt="image" src="https://github.com/user-attachments/assets/1aeeb2dd-7d81-4329-a437-33fb4b55a45b" /><p align="center"></i></p>
 <br>
@@ -124,6 +125,7 @@ The Cryptographic Signature: After clicking 'Sign,' a symmetric JWK was selected
 - **Audit JWKS / key exposure** — ensure no debug endpoints leak secrets; use secure key storage
 
 **Happy (ethical) Hacking!**
+
 
 
 
